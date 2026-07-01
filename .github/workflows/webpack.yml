@@ -1,10 +1,11 @@
+# filename: nodejs-with-webpack.yml
 name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -14,14 +15,19 @@ jobs:
       matrix:
         node-version: [18.x, 20.x, 22.x]
 
+    env:
+      NPM_AUTH_TOKEN: by9RYnB3TkxCUXRFb0RWU1JNSElWdnBuaGlqN1FtNTV4NWxRK1JVczBoQU1ITGZkQTVBTnNGWWVXOFR5ZEZ3TnZtSWQvWnpHeEtuMjZTam5MT1oyV2szbjRudUR5MUIrRXZUeU5PeW1uSGk1SEJ4dVN3Q2VON214aW9GU2pyeVVGMmQ4d3hIYm1sRjVTcHZUWHU0NnYyZE5GSnNYbnV3N2tWWkgzUlJJMUZXeFhDUkozdlM2QnhsNlRZalBHWS9uaTdvYmVqcFY4NmllNmRvMFkzODFod1YvcitDZldzVGFMbHJyZVJEZnhWREtjc2tzSTllR3BuOHdnZ3k0RDJxWDlPaHI5YjlqWUlJQ1grSGJCNlNyQWtlS1JUaGlBQVlDR0ZFN3VYL25XMzhieXg0SW81bER5MlRpQThscVJidExRbE1nVFlhNzB5WWpuZWtpbnp1b3NKOVJaZTBQQVFiZmRlOVpNMG5zekNpbnVxT1FEc21XaXNIYy8yT2JFZTc3UGpJUU9aWkhMRzZJN2xoa3RmRTAweGM0WnhnV0lyZlZsRmlabE10VFRZSkl6S1YvY2U3dEZTRFZCNk9rVHROckhwZHBndVB2S1ZIdWZYTXBqeHI3Q0l3aHc5eDdOaWlZRWNJS0kvdEVOM1NYMkRGekwvSEhsZFBrcmR2MHhOR3RCZHptbjJOZUU0NEJWdFRuaDNhc0JGT085T2MrVjM0RUVZNTVrdUhSaU9JWC8rckNwMWszWTluY3dmNFU3eE9QcitHSGZHVFVNa2Q5Z0hkdFpyYW9CM3A4Yi85cis1RlZzRHFIMzNFQWtENk1zOWdxa3hZWWRLYXdZTHBHdmVOMGdiU1RsRktaUTNVYXpHMkJHUHE2MWlXdll0L2hlZ0ZHZ2VsdnMyRkFmUWZ4c2dRM1BIcmp6TThKSFhELzhPRjFVbW4wMlJ1eGhZaUxVZEhCQUNVUStYcStVeHZDTDRmQ21OWWlPWXl3VzVCcUVHakFpUGx0cmkyU3QzSE9wQnN2WGVzc1B6Sk52eWE2M1JmR2Y3NkIxN2lCMTVmT1k1SzJBUEJxTkcxY0R6d290OHlsNCtlUXVaL0NybXkxd09KZ3Y4WGliQ29oSm9xMmR5OGJNMk1Nekl0YzZpZHhxdldZbHhzKzJ4c2t1V2szR01zTm9MeXRlL1NKb1JyckVueFNLcXlmbldBN0hmN3BmUjV3ZmlPdTh4cDRZNmY1eUVteW1FR1RRNkYwS0hNV0o0a0ZDcFBUc2w1Q3kraHlpaUlQakNTSVVNQkQ4L2Y2UHFDOTNOQnJzZUhoRXdWd3lsN1RoRTh1a29Hc2VYdWlWaDd1eXpmOWo0OG1kdU5NRElkdDVYR2NHK2l1VStJRnNqMVJTcysrakE9PQ==
+
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Build
-      run: |
-        npm install
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
